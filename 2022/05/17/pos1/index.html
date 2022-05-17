@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="调用帮助perl METABOLIC-G.pl -help perl METABOLIC-C.pl -help 参数解释 -in-gn 如果输入核苷酸序列，则需要。提供包含以.fasta结尾的核苷酸文件的文件夹 -in 如果输入蛋白序列，则需要。提供包含以.faa结尾的氨基酸序列的文件夹 -r 提供一个文本文件，包含paired reads -rt 只在METABOLIC-C模式下需要提供，包括‘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/05/17/pos1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="调用帮助perl METABOLIC-G.pl -help perl METABOLIC-C.pl -help 参数解释 -in-gn 如果输入核苷酸序列，则需要。提供包含以.fasta结尾的核苷酸文件的文件夹 -in 如果输入蛋白序列，则需要。提供包含以.faa结尾的氨基酸序列的文件夹 -r 提供一个文本文件，包含paired reads -rt 只在METABOLIC-C模式下需要提供，包括‘">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/Xuyifei-NAU/note_image@master/uPic/NPtVsl.png">
+<meta property="article:published_time" content="2022-05-17T15:03:24.232Z">
+<meta property="article:modified_time" content="2022-05-17T15:03:24.232Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/Xuyifei-NAU/note_image@master/uPic/NPtVsl.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-pos1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/17/pos1/" class="article-date">
+  <time class="dt-published" datetime="2022-05-17T15:03:24.232Z" itemprop="datePublished">2022-05-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="调用帮助"><a href="#调用帮助" class="headerlink" title="调用帮助"></a>调用帮助</h2><p><code>perl METABOLIC-G.pl -help</code></p>
+<p><code>perl METABOLIC-C.pl -help</code></p>
+<h2 id="参数解释"><a href="#参数解释" class="headerlink" title="参数解释"></a>参数解释</h2><ul>
+<li><code>-in-gn</code> 如果输入核苷酸序列，则需要。提供包含以.fasta结尾的核苷酸文件的文件夹</li>
+<li><code>-in</code> 如果输入蛋白序列，则需要。提供包含以.faa结尾的氨基酸序列的文件夹</li>
+<li><code>-r</code> 提供一个文本文件，包含paired reads</li>
+<li><code>-rt</code> 只在METABOLIC-C模式下需要提供，包括‘metaG’（宏基因组数据）和‘metaT’（转录组数据）两种选择。默认为metaG</li>
+<li><code>-st</code> 测序所基于的平台，默认为‘illumina’，可以选”pacbio”, “pacbio_hifi”, “pacbio_asm20”,”nanopore”</li>
+<li><code>t</code> 线程数，默认为20</li>
+<li><code>-m-cutoff</code> 定义当前kegg模块步骤的分数，以指定当前的kegg模块(默认值:0.75)</li>
+<li><code>-kofam-db</code> 通过程序定义使用完整（“完整”）或减少（“small”）kofam数据库（默认值：’full’）。“小”kofam数据库仅包含KOG模块中的KOS，使用此设置将显着减少HMMSearch运行时间</li>
+<li><code>-tax</code> 计算微生物类群在哪个分类级别的分辨率下的MW-score贡献(默认为“门”;其他选项:“类”、“目”、“科”和“属”)。只在METABOLIC-C模式下需要提供</li>
+<li><code>-p</code> 指定prodigal注释ORFs的方法，默认是‘meta’，可以选‘single’</li>
+<li><code>-o</code> 输出目录，默认是当前路径</li>
+<li>note1: 输入文件中不要有空格，(建议在文件名中只使用字母数字字符和下划线)。如果您想使用METABOLIC-C，只有“fasta”文件被允许执行良好的分析。</li>
+<li>note2: 输入宏基因组序列文件，需要提供包含read文件的路径。使用绝对路径，且为解压后的fastq文件，配对的样本放一行，使用’,’分隔。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#Read pairs: </span><br><span class="line">/path/to/your/reads/file/SRR3577362_sub_1.fastq,/path/to/your/reads/file/SRR3577362_sub_2.fastq</span><br><span class="line">/path/to/your/reads/file/SRR3577362_sub2_1.fastq,/path/to/your/reads/file/SRR3577362_sub2_2.fastq</span><br></pre></td></tr></table></figure></li>
+<li>note3:对于三代测序的长reads输入，一方面需要设置-st参数，其次也需要使用解压后的文件，由于一般是单端测序，所以每一行输入一个样本<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#Read pairs: </span><br><span class="line">/path/to/your/reads/file/Nanopore_1st_run.fastq</span><br><span class="line">/path/to/your/reads/file/Nanopore_2nd_run.fastq</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="运行测试数据"><a href="#运行测试数据" class="headerlink" title="运行测试数据"></a>运行测试数据</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">perl METABOLIC-G.pl -test true</span><br><span class="line"></span><br><span class="line">perl METABOLIC-C.pl -test true</span><br></pre></td></tr></table></figure>
+
+<p>测试数据包含5个基因组和一个配对的宏基因组数据，输出文件在METABOLIC_test_files文件夹内</p>
+<h2 id="如何运行METABOLIC"><a href="#如何运行METABOLIC" class="headerlink" title="如何运行METABOLIC"></a>如何运行METABOLIC</h2><ul>
+<li><p>运行METABOLIC-G(输入核苷酸序列)所需要的最少参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl METABOLIC-G.pl -in-gn [path_to_folder_with_genome_files] -o [output_directory_to_be_created]</span><br></pre></td></tr></table></figure></li>
+<li><p>运行METABOLIC-G(输入蛋白序列)所需要的最少参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl METABOLIC-G.pl -in [path_to_folder_with_genome_files] -o [output_directory_to_be_created]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行METABOLIC-C(输入核苷酸序列)所需要的最少参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl METABOLIC-C.pl -in-gn [path_to_folder_with_genome_files] -r [path_to_list_of_paired_reads] -o [output_directory_to_be_created]</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="多次运行METABOLIC-C"><a href="#多次运行METABOLIC-C" class="headerlink" title="多次运行METABOLIC-C"></a>多次运行METABOLIC-C</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl METABOLIC-C.2nd_run.pl -in-gn [path_to_folder_with_genome_files_of_a_previous_run] -r [path_to_list_of_paired_reads] -o [output_directory_of_a_previous_run] -2nd-run true -2nd-run-suffix 2nd_run_test</span><br></pre></td></tr></table></figure>
+<p>这个脚本可以使用之前的基因组注释中间文件夹或Metagenomic &#x2F; MetaTranscriptomic的map结果，因此可以节省时间。基于上一次运行文件时，需要注意Prodigal Method (-p or -prodigal-method), KOfam DB (-kofam-db), Module Cutoff Value (-m-cutoff or -module-cutoff), and Input Genome directory (nucleotides) (-in-gn)这些参数需要保持一致。</p>
+<p>需要设置<code>-2nd-run-suffix</code>参数，这样后续的output（包括”METABOLIC_Figures”, “METABOLIC_Figures_Input”, “MW-score_result”, “METABOLIC_run.log”, and “METABOLIC_log.log”）会被加上后缀</p>
+<p>也可以使用之前运行的-depth-file，只需要提供文件名即可，不需要完整路径，如果我们想改变-taxonomy or -tax参数来从不同物种水平计算MW-得分时，这个方法将会很有用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perl METABOLIC-C.2nd_run.pl -in-gn [path_to_folder_with_genome_files_of_a_previous_run] -r [path_to_list_of_paired_reads] -o [output_directory_of_a_previous_run] -2nd-run true -2nd-run-suffix MW_score_tax_genus -depth-file All_gene_collections_mapped.depth.txt -tax genus</span><br></pre></td></tr></table></figure>
+
+<h2 id="输出文件"><a href="#输出文件" class="headerlink" title="输出文件"></a>输出文件</h2><p><img src="https://cdn.jsdelivr.net/gh/Xuyifei-NAU/note_image@master/uPic/NPtVsl.png" alt="NPtVsl"></p>
+<h3 id="METABOLIC-result-xlsx"><a href="#METABOLIC-result-xlsx" class="headerlink" title="METABOLIC_result.xlsx"></a>METABOLIC_result.xlsx</h3><p>METABOLIC result table </p>
+<p>包括了六张表</p>
+<ol>
+<li><em>HMMHitNum</em> 每种基因组内的定制HMM profiles的存在或不存在，在基因组内鉴定HMM profles的次数，以及代表鉴定到的蛋白质的ORF</li>
+<li><em>FunctionHit</em> 在标题为“HMMHitNum”的表格中，是否存在被识别并作为单独蛋白质显示的蛋白质集合。对于每个基因组，其功能被标识为“存在”或“缺失”。</li>
+<li><em>KEGGModuleHit</em> 通过由代谢类别组织的KEGG数据库的模块向每个基因组注释。对于每个基因组，模块被标识为“存在”或“缺失”。</li>
+<li><em>KEGGModuleStepHit</em> 每个基因组中存在或不存在KEGG数据库中的模块，这些模块分为组成模块的步骤。对于每个基因组，模块步骤被标识为“存在”或“缺失”。</li>
+<li><em>dbCAN2Hit</em> dbCAN2注释结果针对所有基因组(CAZy数和命中数)。对于每个基因组，有两个不同的列，显示了一个CAZy被识别的次数和哪些ORF(s)代表蛋白质。</li>
+<li><em>MEROPSHit</em> MEROPS肽酶搜索结果(MEROPS肽酶编号和命中数)。对于每个基因组，有两个不同的列，显示肽酶被识别的次数和哪些ORF(s)代表蛋白质。</li>
+</ol>
+<h3 id="Each-HMM-Amino-Acid-Sequence-x2F"><a href="#Each-HMM-Amino-Acid-Sequence-x2F" class="headerlink" title="Each_HMM_Amino_Acid_Sequence&#x2F;"></a>Each_HMM_Amino_Acid_Sequence&#x2F;</h3><p>从输入的基因组中提取的所有氨基酸序列的集合”。这些文件被识别为与metabolics提供的HMM档案相匹配。</p>
+<h3 id="KEGG-identifier-results-KEGG-identifier-result-x2F"><a href="#KEGG-identifier-results-KEGG-identifier-result-x2F" class="headerlink" title="KEGG identifier results (KEGG_identifier_result&#x2F;)"></a>KEGG identifier results (KEGG_identifier_result&#x2F;)</h3><p>KEGG标识符搜索结果-每个基因组的KEGG标识符编号和命中值，可用于在KEGG Mapper中可视化路径</p>
+<h3 id="脚本生成的所有图片-METABOLIC-Figures-x2F"><a href="#脚本生成的所有图片-METABOLIC-Figures-x2F" class="headerlink" title="脚本生成的所有图片 (METABOLIC_Figures&#x2F;)"></a>脚本生成的所有图片 (METABOLIC_Figures&#x2F;)</h3><ul>
+<li>Nutrient cycling diagrams</li>
+</ul>
+<p>位置：METABOLIC_Figures&#x2F;Nutrient_Cycling_Diagrams</p>
+<p>红色箭头表示路径步骤的存在，黑色箭头表示缺失。注意，箭头的宽度没有任何意义。</p>
+<ul>
+<li>Sequential transformation diagram</li>
+</ul>
+<p>由METABOLIC-C.pl生成，代表了群落内的代谢交接</p>
+<p>对于顺序转化图，我们已经总结和可视化了涉及重要无机元素和有机化合物的顺序转化的微生物的基因组数和基因组覆盖（相对丰度）。</p>
+<p>Sequential_transformation_01.pdf 和 Sequential_transformation_02.pdf.</p>
+<ul>
+<li>Metabolic Sankey diagram</li>
+</ul>
+<p>由METABOLIC-C.pl生成，代表示群落的功能贡献</p>
+<p>对于代谢桑基图，生成一个桑基图，表示给定群落中不同微生物群贡献的功能部分。</p>
+<p>Metabolic_Sankey_diagram.pdf.</p>
+<ul>
+<li>Functional network diagrams<br>由METABOLIC-C.pl生成，代表群落中发现的不同反应之间的代谢联系</li>
+</ul>
+<p>对于功能网络图，将生成门级和整个群落级生物地球化学循环步骤的代谢连接图。</p>
+<p>Functional_network&#x2F;</p>
+<ul>
+<li>MW-score result (MW-score_result&#x2F;)</li>
+</ul>
+<p>对于MW-score结果，将生成显示MW-score (Metabolic Weight score)的表(“MW-score result.txt”)。</p>
+<p>假设有一个包含98个MAGs和1组宏基因组数据。在计算出整个群落的功能能力和各功能的基因覆盖率后，我们采用类似的研究代谢相互作用的方法，选择基因组间共享的功能，并将其丰度相加，得出其在整个群落中的权重。</p>
+<p>在示例图中，“每个功能的MW-score”列表示整个社区中的功能权重。功能共享频率越高，共享函数丰度越高，mw -score越高，定量反映了功能网络中的功能权重。</p>
+<p>其余列表示各门对MW-score的贡献。这有助于反映每个门对整个群落功能的贡献。总的来说，MW-scores提供了一种定量的方法来比较功能权重和功能网络中微生物群的贡献。</p>
+<h2 id="服务器上使用"><a href="#服务器上使用" class="headerlink" title="服务器上使用"></a>服务器上使用</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda activate METABOLIC_v4.0</span><br><span class="line">perl METABOLIC-G.pl -test true</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/17/pos1/" data-id="cl3aagp6p0000r15w7wltb750" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/17/pos2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          pos2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/17/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/17/pos2/">pos2</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/17/pos1/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/17/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
