@@ -4,8 +4,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 阿飞的Debug笔记">
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex">
+    <meta name="keywords" content="【R绘图】线性回归的组合图, 阿飞的Debug笔记">
+    <meta name="description" content="做两个指标的相关性，同时还要计算两个指标的大小
+想到之前看到过一篇推送中教程的图片，便作为参考并进行改编
+结果如下
+
+library(ggplot2)
+library(ggpubr)
+library(patchwork)
+library(g">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +26,7 @@
 
     
 
-    <title>Hello World | 阿飞的Debug笔记</title>
+    <title>【R绘图】线性回归的组合图 | 阿飞的Debug笔记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -311,12 +318,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">【R绘图】线性回归的组合图</h1>
                 </div>
             </div>
         </div>
@@ -430,12 +437,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/R%E8%AF%AD%E8%A8%80-%E7%BB%98%E5%9B%BE/">
+                                <span class="chip bg-color">R语言 绘图</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/R%E8%AF%AD%E8%A8%80%E7%BB%98%E5%9B%BE/" class="post-category">
+                                R语言绘图
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -444,28 +464,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-17
+                    2022-05-24
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-05-17
+                    2022-05-24
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    73
+                    742
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -488,19 +508,98 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+                <p>做两个指标的相关性，同时还要计算两个指标的大小</p>
+<p>想到之前看到过一篇<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/iRJLhQA9mx43TQnGB1ZmQA">推送</a>中教程的图片，便作为参考并进行改编</p>
+<p>结果如下</p>
+<p><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220524191616.png"></p>
+<pre class="line-numbers language-none"><code class="language-none">library(ggplot2)
+library(ggpubr)
+library(patchwork)
+library(ggpmisc)
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo server<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+## 只取一部分数据进行实例
+iris2 &lt;- subset(iris,Species %in% c('setosa','versicolor'))
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+## 画右侧的图形
+## 需要设置vjust参数，否则显著性***可能没有足够空间显示
+## 如果不设置vjust参数，则可以通过修改xlim和ylim，但可能会使得主图散点分布距离边界太远
+(p.r &lt;- ggboxplot(iris2, 
+                  x = "Species", 
+                  y = "Sepal.Length", 
+                  fill = "Species",
+                  palette = c("#00AFBB", "#E7B800"),
+                  add = "jitter", 
+                  add.params = list(fill = "white"))+
+   stat_compare_means(comparisons = list(c('setosa','versicolor')), label = "p.signif",size=10,vjust=0.6)+
+   One_theme()+
+   theme(axis.text.x = element_blank(),
+         axis.text.y = element_blank(),
+         axis.title = element_blank()))
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo deploy<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+## 画上部分图形
+(p.u &lt;- ggboxplot(iris2, 
+                  x = "Species", 
+                  y = "Sepal.Width", 
+                  fill = "Species",
+                  palette = c("#00AFBB", "#E7B800"),
+                  add = "jitter", 
+                  add.params = list(fill = "white"))+
+    stat_compare_means(comparisons = list(c('setosa','versicolor')), label = "p.signif",size=10,vjust=0.6)+
+    coord_flip()+
+    One_theme()+
+    theme(axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          axis.title = element_blank()))
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+## 画主图
+## vstep 设置两组统计信息的间距
+(p3 &lt;- ggplot(iris2, aes (x=Sepal.Width, y=Sepal.Length,fill=Species)) +
+    geom_point(alpha=1,size=3, shape=21)+
+    geom_smooth(method='lm',colour="black",size=1,level=0.95,show.legend = F)+
+    scale_fill_manual(values = c("#00AFBB", "#E7B800"),name='')+
+    scale_color_manual(values = c("#00AFBB", "#E7B800"),name='')+
+    labs(x='Sepal Width',y='Sepal Length')+
+    stat_poly_eq(aes(color=Species,label = paste(
+      #..eq.label.., ## 方程展示
+      ..adj.rr.label.., 
+      ..p.value.label..,
+      sep = '~~~')), 
+      label.x='right', 
+      formula = y ~ x, parse = T,size=5,vstep = 0.1)+
+    xlim(ggplot_build(p.u)$layout$panel_scales_y[[1]]$range$range) +
+    ylim(ggplot_build(p.r)$layout$panel_scales_y[[1]]$range$range) +
+    One_theme()+
+    theme(axis.text.x = element_text(size=15,color = 'black'),
+          axis.text.y = element_text(size=15,color = 'black'),
+          axis.title.x = element_text(size = 15,face = 'bold'),
+          axis.title.y = element_text(size = 15,face = 'bold')))
+
+
+# 单独提取并制作图例
+leg &lt;- get_legend(p3+theme(legend.position = 'top',legend.background = element_blank(),
+                           legend.text = element_text(size=15))+
+                    guides(fill = guide_legend(nrow = 2,override.aes = list(size=7))))
+# 将图例转换为图片
+as_ggplot(leg)
+
+## 组合图形
+p.u +as_ggplot(leg)+p3+ p.r  + 
+  plot_layout(heights = c(1,4),widths = c(4,1),ncol = 2,nrow = 2)
+
+## 输出图形
+pdf(paste0(output,'Length-Width.pdf'),onefile=F,height=6.5,width=6.5)
+p.u +as_ggplot(leg)+p3+ p.r  + 
+  plot_layout(heights = c(1,4),widths = c(4,1),ncol = 2,nrow = 2)
+dev.off()
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<p>组合图形主要需要考虑一些细节对齐以及展示的问题</p>
+<p>比如<code>ggpubr:::stat_compare_means</code>中<code>vjust</code>参数调节<code>*</code>的位置；<code>ggpmisc:::stat_poly_eq</code>中<code>vstep</code>参数调节两组数值的间距</p>
+<p>我们设置了右边与上边两个图形的坐标轴标签和标题都为空白，在ggplot2有两种方式，第一种是通过<code>labs(x='',y='')</code>将其赋值为空白，但是这种方法在组合图形的时候，会导致两组图形之间存在较大的间距，因为我们只是将标签和标题设置为了空，但是作图时仍然保留了其在图片上的位置，因此，通过对<code>theme</code>函数的设置，可以保证彻底不对该部分进行作图，便减少了空白间距</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/iRJLhQA9mx43TQnGB1ZmQA">酷不酷炫！想不想学！带统计学的PCoA完美解决打样本量多组数据不好区分的问题！！</a></p>
+</blockquote>
 
                 
             </div>
@@ -527,7 +626,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://xuyifei-nau.github.io/2022/05/17/hello-world/">https://xuyifei-nau.github.io/2022/05/17/hello-world/</a>
+                    <a href="https://xuyifei-nau.github.io/2022/05/24/r-hui-tu-xian-xing-hui-gui-de-zu-he-tu/">https://xuyifei-nau.github.io/2022/05/24/r-hui-tu-xian-xing-hui-gui-de-zu-he-tu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -564,7 +663,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/R%E8%AF%AD%E8%A8%80-%E7%BB%98%E5%9B%BE/">
+                                    <span class="chip bg-color">R语言 绘图</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -1002,9 +1105,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/05/24/r-hui-tu-xian-xing-hui-gui-de-zu-he-tu/">
                     <div class="card-image">
@@ -1022,9 +1126,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-05-24
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-24
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -1037,6 +1141,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -1052,7 +1157,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2022/05/17/hello-world/">
@@ -1082,7 +1187,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
