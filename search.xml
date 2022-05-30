@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>VSCode中使用Remote SSH连接远程服务器</title>
+      <link href="/2022/05/29/ssh-lian-jie-yuan-cheng-fu-wu-qi/"/>
+      <url>/2022/05/29/ssh-lian-jie-yuan-cheng-fu-wu-qi/</url>
+      
+        <content type="html"><![CDATA[<p>首先进入<a href="https://code.visualstudio.com/docs/?dv=win64user">VSCode官网</a>下载VSCode进行安装</p><p>安装完毕，打开软件后，在extension中搜索Remote SSH，找到插件并安装<br><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220517155952.png"></p><p>点击左下角的图标，然后首先选择第三个configuration file<br><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220517160538.png"></p><p>在config文件中我们添加如下信息，第七行开始是第二个用户的信息<br><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220517161125.png"></p><p>IdentityFile是远程免密登录需要配置的文件，可以先写上路径，之后会进行创建，如果不需要则不填写即可</p><p>通过<code>win+r</code>，输入<code>cmd</code>，打开window的命令行工具，输入<code>ssh-keygen</code>，一直回车即可，我们在<code>C:\Users\你的用户\.ssh\</code>便生成了两个文件</p><p><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220517161634.png"></p><p>下面在服务器上对文件进行操作</p><pre class="line-numbers language-none"><code class="language-none">cd ~mkdir -p .sshcd .ssh## 上传id_rsa.pub至当前目录cat id_rsa.pub &gt; authorized_keyschmod 755 * # 我操作过程中需要修改文件权限才能进行免密访问# 用root权限对如下文件进行修改perl -p -i -e 's/#RSAAuthentication/RSAAuthentication/' /etc/ssh/sshd_configperl -p -i -e 's/#PubkeyAuthentication/PubkeyAuthentication/' /etc/ssh/sshd_configperl -p -i -e 's/#AuthorizedKeysFile/AuthorizedKeysFile/' /etc/ssh/sshd_configperl -p -i -e 's/.*PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_configperl -p -i -e 's/.*Protocol\s+2.*/Protocol 2/' /etc/ssh/sshd_configperl -p -i -e 's/.*ClientAliveInterval.*/ClientAliveInterval 60/' /etc/ssh/sshd_configperl -p -i -e 's/.*ClientAliveCountMax.*/ClientAliveCountMax 10/' /etc/ssh/sshd_configperl -p -i -e 's/.*UseDNS.*/UseDNS no/' /etc/ssh/sshd_configperl -p -i -e 's/GSSAPIAuthentication yes/GSSAPIAuthentication no/' /etc/ssh/sshd_configperl -p -i -e 's/.*GatewayPorts.*/GatewayPorts yes/' /etc/ssh/sshd_config## 重启ssh服务systemctl restart sshd.service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>配置完成后，在VSCode中选择第二项，connect currant windows to Host，选择用户，即可登录</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> VSCode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> VSCode. SSH </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【R绘图】线性回归的组合图</title>
       <link href="/2022/05/24/r-hui-tu-xian-xing-hui-gui-de-zu-he-tu/"/>
       <url>/2022/05/24/r-hui-tu-xian-xing-hui-gui-de-zu-he-tu/</url>

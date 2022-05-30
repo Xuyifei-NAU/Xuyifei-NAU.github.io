@@ -4,8 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="阿飞的Debug笔记">
-    <meta name="description" content="阿飞的Debug笔记">
+    <meta name="keywords" content="VSCode中使用Remote SSH连接远程服务器, 阿飞的Debug笔记">
+    <meta name="description" content="首先进入VSCode官网下载VSCode进行安装
+安装完毕，打开软件后，在extension中搜索Remote SSH，找到插件并安装
+点击左下角的图标，然后首先选择第三个configuration file
+在config文件中我们添加如">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +22,7 @@
 
     
 
-    <title>阿飞的Debug笔记</title>
+    <title>VSCode中使用Remote SSH连接远程服务器 | 阿飞的Debug笔记</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -311,12 +314,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">VSCode中使用Remote SSH连接远程服务器</h1>
                 </div>
             </div>
         </div>
@@ -430,12 +433,25 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/VSCode-SSH/">
+                                <span class="chip bg-color">VSCode. SSH</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/VSCode/" class="post-category">
+                                VSCode
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -444,21 +460,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-05-21
+                    2022-05-29
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-05-21
+                    2022-05-30
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    26
+                    381
                 </div>
                 
 
@@ -488,7 +504,36 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>title: 404<br>date: 2019-08-5 16:41:10<br>type: “404”<br>layout: “404”<br>description: “Oops～，我崩溃了！找不到你想要的页面 :(“</p>
+                <p>首先进入<a target="_blank" rel="noopener" href="https://code.visualstudio.com/docs/?dv=win64user">VSCode官网</a>下载VSCode进行安装</p>
+<p>安装完毕，打开软件后，在extension中搜索Remote SSH，找到插件并安装<br><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220517155952.png"></p>
+<p>点击左下角的图标，然后首先选择第三个configuration file<br><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220517160538.png"></p>
+<p>在config文件中我们添加如下信息，第七行开始是第二个用户的信息<br><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220517161125.png"></p>
+<p>IdentityFile是远程免密登录需要配置的文件，可以先写上路径，之后会进行创建，如果不需要则不填写即可</p>
+<p>通过<code>win+r</code>，输入<code>cmd</code>，打开window的命令行工具，输入<code>ssh-keygen</code>，一直回车即可，我们在<code>C:\Users\你的用户\.ssh\</code>便生成了两个文件</p>
+<p><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220517161634.png"></p>
+<p>下面在服务器上对文件进行操作</p>
+<pre class="line-numbers language-none"><code class="language-none">cd ~
+mkdir -p .ssh
+cd .ssh
+## 上传id_rsa.pub至当前目录
+cat id_rsa.pub &gt; authorized_keys
+chmod 755 * # 我操作过程中需要修改文件权限才能进行免密访问
+
+# 用root权限对如下文件进行修改
+perl -p -i -e 's/#RSAAuthentication/RSAAuthentication/' /etc/ssh/sshd_config
+perl -p -i -e 's/#PubkeyAuthentication/PubkeyAuthentication/' /etc/ssh/sshd_config
+perl -p -i -e 's/#AuthorizedKeysFile/AuthorizedKeysFile/' /etc/ssh/sshd_config
+perl -p -i -e 's/.*PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+perl -p -i -e 's/.*Protocol\s+2.*/Protocol 2/' /etc/ssh/sshd_config
+perl -p -i -e 's/.*ClientAliveInterval.*/ClientAliveInterval 60/' /etc/ssh/sshd_config
+perl -p -i -e 's/.*ClientAliveCountMax.*/ClientAliveCountMax 10/' /etc/ssh/sshd_config
+perl -p -i -e 's/.*UseDNS.*/UseDNS no/' /etc/ssh/sshd_config
+perl -p -i -e 's/GSSAPIAuthentication yes/GSSAPIAuthentication no/' /etc/ssh/sshd_config
+perl -p -i -e 's/.*GatewayPorts.*/GatewayPorts yes/' /etc/ssh/sshd_config
+## 重启ssh服务
+systemctl restart sshd.service<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>配置完成后，在VSCode中选择第二项，connect currant windows to Host，选择用户，即可登录</p>
 
                 
             </div>
@@ -515,7 +560,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://xuyifei-nau.github.io/404.html">https://xuyifei-nau.github.io/404.html</a>
+                    <a href="https://xuyifei-nau.github.io/2022/05/29/ssh-lian-jie-yuan-cheng-fu-wu-qi/">https://xuyifei-nau.github.io/2022/05/29/ssh-lian-jie-yuan-cheng-fu-wu-qi/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -552,7 +597,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/VSCode-SSH/">
+                                    <span class="chip bg-color">VSCode. SSH</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -995,13 +1044,13 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/404.html">
+                <a href="/2022/05/29/ssh-lian-jie-yuan-cheng-fu-wu-qi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="VSCode中使用Remote SSH连接远程服务器">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">VSCode中使用Remote SSH连接远程服务器</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1012,17 +1061,29 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-29
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Xuyifei
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/VSCode/" class="post-category">
+                                    VSCode
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
 
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/VSCode-SSH/">
+                        <span class="chip bg-color">VSCode. SSH</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -1030,16 +1091,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/404.html">
+                <a href="/2022/05/24/r-hui-tu-xian-xing-hui-gui-de-zu-he-tu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="【R绘图】线性回归的组合图">
                         
-                        <span class="card-title"></span>
+                        <span class="card-title">【R绘图】线性回归的组合图</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1050,17 +1111,32 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-24
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            Xuyifei
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/R%E8%AF%AD%E8%A8%80%E7%BB%98%E5%9B%BE/" class="post-category">
+                                    R语言绘图
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/R%E8%AF%AD%E8%A8%80/">
+                        <span class="chip bg-color">R语言</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BB%98%E5%9B%BE/">
+                        <span class="chip bg-color">绘图</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
