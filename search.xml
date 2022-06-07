@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【R语言】散点图修改图例点样式</title>
+      <link href="/2022/06/07/r-yu-yan-san-dian-tu-xiu-gai-tu-li-dian-yang-shi/"/>
+      <url>/2022/06/07/r-yu-yan-san-dian-tu-xiu-gai-tu-li-dian-yang-shi/</url>
+      
+        <content type="html"><![CDATA[<p>基于plot函数去绘图时，图例可以单独绘制再添加，比较容易修改图例中散点的形状，但是ggplot2绘图时很少有单独调节散点形状的步骤</p><p>今天正好有这个需求，做一个记录</p><p>首先准备一下数据并做一些计算</p><pre class="line-numbers language-none"><code class="language-none">library(ggplot2)library(vegan)data(iris)iris$Group &lt;- iris$Species %&gt;% do::Replace(from = 'setosa',to='G1')iris$Group[grep('G1',iris$Group,invert = T)] &lt;- 'G2'## 获得了G1和G2两组，其中G2中包含2个SpeciesNMDS.out &lt;- metaMDS(iris[,c(1:4)],distance = 'bray')NMDS.out.meta &lt;- cbind(iris[,c(5:6)],scores(NMDS.out),by='row.names')<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>Species中setosa属于G1，其余的versicolor和virginica属于G2</p><p>下面绘图想把Species的三类分别映射为不同颜色，Group的两类映射为点的不同形状</p><pre class="line-numbers language-none"><code class="language-none">ggplot(data = NMDS.out.meta,aes(x=NMDS1,y=NMDS2,fill=Species,shape=Group))+  scale_shape_manual(name='Group',values = c(21,22))+  geom_vline(xintercept = 0,linetype =2)+  geom_hline(yintercept = 0,linetype =2)+  geom_point(size=3)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220607224328.png"></p><p>直接绘图，发现图片中点的形状是符合预期的，但是图例中点全是黑色</p><p>推测可能因为图例中点使用的是默认只有color属性而没有fill属性的点类型，与我们绘图指定的点类型不同</p><p>因为修改图例点类型即可</p><pre class="line-numbers language-none"><code class="language-none">## 方案一 修改为统一的空心可填充圆ggplot(data = NMDS.out.meta,aes(x=NMDS1,y=NMDS2,fill=Species,shape=Group))+    scale_shape_manual(name='Group',values = c(21,22))+    geom_vline(xintercept = 0,linetype =2)+    geom_hline(yintercept = 0,linetype =2)+    geom_point(size=3)+    guides(fill=guide_legend(override.aes = list(shape = 21)))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220607224135.png"></p><pre class="line-numbers language-none"><code class="language-none">## 方案二 挨个赋值，同步映射形状与填充ggplot(data = NMDS.out.meta,aes(x=NMDS1,y=NMDS2,fill=Species,shape=Group))+    scale_shape_manual(name='Group',values = c(21,22))+    geom_vline(xintercept = 0,linetype =2)+    geom_hline(yintercept = 0,linetype =2)+    geom_point(size=3)+    guides(fill=guide_legend(override.aes = list(shape = c(21,22,22))))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p><img src="https://raw.githubusercontent.com/Xuyifei-NAU/note_image/master/20220607224259.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> R语言绘图 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> R语言 </tag>
+            
+            <tag> 绘图 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>test</title>
       <link href="/2022/05/30/test/"/>
       <url>/2022/05/30/test/</url>
